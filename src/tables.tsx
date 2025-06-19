@@ -1,6 +1,5 @@
 import React from "react";
-import "./estilotabla.css"; 
-
+import "./estilotabla.css"; // Importa el CSS del componente
 
 const projects = [
     {
@@ -70,7 +69,8 @@ const progressIcon = (color: string) => {
 
 const Tables: React.FC = () => (
     <>
-        <link rel="stylesheet" href="estilotabla.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/riva-dashboard-tailwind/riva-dashboard.css" />
+        <link rel="stylesheet" href="ta" />
         <div className="flex flex-wrap -mx-3 mb-5">
             <div className="w-full max-w-full px-3 mb-6  mx-auto">
                 <div className="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
