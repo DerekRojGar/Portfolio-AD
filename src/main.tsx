@@ -6,6 +6,7 @@ import App from './App.tsx'
 import Tabla2 from './tabla2.tsx'
 import Footer from './components/footer.tsx'
 import Navbar from './components/nav.tsx'
+import Login from './components/login.tsx' // Importa el componente Login
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<App />} />
         <Route path='/footer' element={<Footer />} />
         <Route path='/nav' element={<Navbar />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
