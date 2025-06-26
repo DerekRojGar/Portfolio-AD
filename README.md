@@ -1,59 +1,122 @@
-<<<<<<< HEAD
 # Portfolio-AD
-Repo de portafolio web
-=======
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bienvenido a **Portfolio-AD**, el portafolio digital desarrollado por Devasive Software. Este proyecto es una carta de presentación profesional y una muestra de nuestras capacidades técnicas, pensado para desarrolladores, empresas y reclutadores que buscan conocer nuestro trabajo y experiencia.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Sobre Portfolio-AD
 
-## Expanding the ESLint configuration
+Portfolio-AD es una aplicación web moderna, responsiva y personalizable, diseñada para mostrar proyectos, habilidades y experiencia profesional de manera visual, clara y atractiva. Su arquitectura modular y su código limpio permiten adaptarlo fácilmente a cualquier perfil profesional.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🛠️ Tecnologías principales
+
+- **React** + **TypeScript**: Desarrollo de interfaces robustas y tipadas.
+- **Vite**: Bundler ultrarrápido para desarrollo moderno.
+- **ESLint** & **Prettier**: Calidad y estilo de código garantizados.
+- **CSS Modules** o **Tailwind CSS**: Estilizado flexible y escalable.
+
+---
+
+## 📁 Estructura del Proyecto
+
+```
+/
+├── public/               # Recursos estáticos globales
+├── src/
+│   ├── assets/           # Imágenes y recursos visuales
+│   ├── components/       # Componentes reutilizables
+│   ├── pages/            # Vistas principales (Home, About, Projects, Contact)
+│   ├── styles/           # Estilos globales y utilitarios
+│   ├── hooks/            # Custom hooks (lógica reutilizable)
+│   ├── utils/            # Funciones auxiliares
+│   ├── data/             # Datos estáticos o mocks
+│   └── main.tsx          # Entrada principal de la app
+├── .eslintrc.cjs         # Configuración de ESLint
+├── .prettierrc           # Configuración de Prettier
+├── tsconfig.json         # Configuración de TypeScript
+├── vite.config.ts        # Configuración de Vite
+├── package.json          # Dependencias y scripts
+└── README.md             # Documentación y presentación
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚡ Instalación rápida
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
->>>>>>> c26268b (Commit Inicial)
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/tu-usuario/portfolio-ad.git
+   cd portfolio-ad
+   ```
+2. **Instala dependencias:**
+   ```bash
+   npm install
+   # o
+   yarn install
+   ```
+3. **Inicia el entorno de desarrollo:**
+   ```bash
+   npm run dev
+   # o
+   yarn dev
+   ```
+
+---
+
+## 🧩 Personalización
+
+- **Datos personales y proyectos:** Edita los archivos en `src/data/` o los props de los componentes en `src/pages/` y `src/components/`.
+- **Estilos:** Modifica los estilos globales en `src/styles/` o personaliza Tailwind/CSS Modules.
+- **Imágenes:** Agrega tus recursos en `src/assets/` y actualiza las referencias.
+
+---
+
+## 🏗️ Scripts útiles
+
+- `dev`: Servidor de desarrollo con recarga en caliente.
+- `build`: Build optimizada para producción.
+- `preview`: Previsualiza la build localmente.
+- `lint`: Analiza la calidad del código con ESLint.
+
+---
+
+## 📦 Despliegue
+
+Despliega tu portafolio fácilmente en:
+
+- [Vercel](https://vercel.com/)
+- [Netlify](https://www.netlify.com/)
+- [GitHub Pages](https://pages.github.com/)
+- Cualquier hosting estático
+
+### Ejemplo en Vercel
+
+1. Sube tu repo a GitHub.
+2. Conéctalo en [Vercel](https://vercel.com/import).
+3. Sigue los pasos para desplegar automáticamente.
+
+---
+
+## 🤝 Contribución
+
+¿Te gustaría aportar? ¡Las contribuciones son bienvenidas! Abre un issue o pull request para sugerencias, mejoras o reportes de bugs.
+
+---
+
+## 📬 Contacto
+
+¿Te interesa trabajar con nosotros o tienes alguna consulta?  
+**Email:** [contacto@devasive.com](mailto:contacto@devasive.com)  
+**Web:** [https://devasive.com](https://devasive.com)
+
+---
+
+## 📝 Licencia
+
+Este proyecto está bajo la licencia MIT.
+
+---
+
+Desarrollado con pasión por **Devasive Software**.
