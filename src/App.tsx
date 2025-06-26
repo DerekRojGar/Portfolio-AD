@@ -1,23 +1,48 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import Navbar from './components/nav'
-import Tables from './tables' // Importa el componente Tables
-//import Tabla2 from './tabla2' // Importa el componente Tabla2
+import Tables from './tables'
 import Footer from './components/footer'
 import Carousel from './components/carousel'
+import About from './components/about'
 
 function App() {
+  const [showNavbar, setShowNavbar] = useState(false)
+  const carouselRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (carouselRef.current) {
+        const carouselBottom = carouselRef.current.getBoundingClientRect().bottom
+        setShowNavbar(carouselBottom <= 0)
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <>
-      <Navbar /> {/* Renderiza el componente Navbar */}
-      <div>
-        <Carousel /> {/* Renderiza el componente Carousel */}
-        {/* <Tabla2 /> */} {/* Renderiza el componente Tabla2 si es necesario */}
-        { <Tables /> /* Renderiza el componente Tables */}        
+  <>
+    <div
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-1500 ease-in-out ${
+        showNavbar
+          ? "opacity-100 translate-y-0 pointer-events-auto"
+          : "opacity-0 -translate-y-10 pointer-events-none"
+      }`}
+      style={{ willChange: "transform, opacity" }}
+    >
+      <Navbar />
+    </div>
+    <div>
+      <div ref={carouselRef}>
+        <Carousel />
       </div>
-      <Footer /> {/* Renderiza el componente Footer */}
-    </>
-  )
+      <Tables />
+      <About />
+    </div>
+    <Footer />
+  </>
+)
 }
 
 export default App

@@ -24,11 +24,11 @@ const Carousel: React.FC = () => {
   const goToSlide = (idx: number) => setCurrent(idx);
 
   return (
-    <div className="max-w-2xl mx-auto pt-24">
-      <div className="relative">
+    <div className="max-w-5xl mx-auto pt-24">
+    <div className="relative">
         {/* Carousel wrapper */}
-        <div className="overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
-          {images.map((img, idx) => (
+        <div className="overflow-hidden relative h-80 rounded-lg sm:h-96 xl:h-[32rem] 2xl:h-[40rem]">
+        {images.map((img, idx) => (
             <div
                 key={img.src}
                 className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${idx === current ? "opacity-100 z-10" : "opacity-0 z-0"}`}
@@ -82,7 +82,7 @@ const Carousel: React.FC = () => {
           </span>
         </button>
       </div>
-      <p className="mt-5">
+      {/* <p className="mt-5">
         This carousel slider component is part of a larger, open-source library of Tailwind CSS components. Learn
         more by going to the official{" "}
         <a className="text-blue-600 hover:underline"
@@ -90,7 +90,7 @@ const Carousel: React.FC = () => {
           target="_blank" rel="noopener noreferrer">
           Flowbite Documentation
         </a>.
-      </p>
+      </p> */}
     </div>
   );
 };
