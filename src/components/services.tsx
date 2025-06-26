@@ -38,7 +38,7 @@ const gradientBg =
     "bg-gradient-to-br from-indigo-100 via-white to-indigo-200";
 
 const ServicesSection: React.FC = () => (
-    <section className={`py-16 mb-8 md:mb-16 ${gradientBg} relative overflow-hidden`}>
+    <section id="servicios" className={`py-16 mb-8 md:mb-16 ${gradientBg} relative overflow-hidden`}>
         {/* Decorative blurred shapes */}
         <div className="absolute top-0 left-0 w-72 h-72 bg-indigo-200 opacity-30 rounded-full blur-3xl -z-10 animate-pulse" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-400 opacity-20 rounded-full blur-3xl -z-10 animate-pulse" />

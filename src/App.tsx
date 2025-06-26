@@ -40,7 +40,7 @@ function App() {
       <Carousel />
       </div>
       {/* <Tables /> */}
-      <About />
+      {/*<About />*/}
       <AboutV2 />
       <ServicesSection />
     </div>
