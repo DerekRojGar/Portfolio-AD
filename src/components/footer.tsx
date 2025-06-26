@@ -1,5 +1,5 @@
 const Footer = () => (
-  <footer className="relative bg-gradient-to-tr from-gray-900 via-gray-800 to-gray-900 text-gray-300 py-12 mt-12 shadow-2xl overflow-hidden">
+  <footer className="relative bg-gradient-to-tr from-gray-900 via-gray-800 to-gray-900 text-gray-300 py-12 shadow-2xl overflow-hidden">
     <div className="absolute inset-0 pointer-events-none">
       <div className="w-72 h-72 bg-purple-700 opacity-20 rounded-full blur-3xl animate-pulse-slow absolute -top-24 -left-24"></div>
       <div className="w-72 h-72 bg-blue-500 opacity-20 rounded-full blur-3xl animate-pulse-slow absolute -bottom-24 -right-24"></div>
