@@ -34,45 +34,141 @@ const services = [
     },
 ];
 
-const gradientBg =
-    "bg-gradient-to-br from-indigo-100 via-white to-indigo-200";
+const useIsMobile = () => {
+    const [isMobile, setIsMobile] = React.useState(
+        window.innerWidth <= 700
+    );
+    React.useEffect(() => {
+        const handler = () => setIsMobile(window.innerWidth <= 700);
+        window.addEventListener("resize", handler);
+        return () => window.removeEventListener("resize", handler);
+    }, []);
+    return isMobile;
+};
 
-const ServicesSection: React.FC = () => (
-    <section id="servicios" className={`py-16 mb-8 md:mb-16 ${gradientBg} relative overflow-hidden`}>
-        {/* Decorative blurred shapes */}
-        <div className="absolute top-0 left-0 w-72 h-72 bg-indigo-200 opacity-30 rounded-full blur-3xl -z-10 animate-pulse" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-400 opacity-20 rounded-full blur-3xl -z-10 animate-pulse" />
-        <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-4 text-center tracking-tight drop-shadow-lg">
-                Servicios
-            </h2>
-            <p className="text-lg text-gray-600 text-center max-w-2xl mx-auto">
-                Soluciones digitales a medida para potenciar tu presencia online y optimizar tus procesos.
-            </p>
-            <div className="grid gap-12 md:grid-cols-3">
-                {services.map((service, idx) => (
-                    <div
-                        key={idx}
-                        className="group bg-white/90 border border-indigo-100 rounded-3xl p-10 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-3 hover:border-indigo-400 relative overflow-hidden"
-                    >
-                        {/* Animated background accent */}
-                        <span className="absolute -top-10 -right-10 w-40 h-40 bg-indigo-100 rounded-full opacity-0 group-hover:opacity-70 transition duration-700 blur-2xl"></span>
-                        <div className="flex items-center justify-center mb-8">
-                            <div className="bg-gradient-to-tr from-indigo-100 to-indigo-300 rounded-2xl p-6 shadow-md transition-transform duration-300 group-hover:scale-110">
-                                {service.icon}
+const ServicesSection: React.FC = () => {
+    const isMobile = useIsMobile();
+
+    return (
+        <section
+            id="servicios"
+            style={{
+                background: "linear-gradient(120deg, #f5f8ff 0%, #eaf0fb 100%)",
+                padding: isMobile ? "0" : "0",
+                maxWidth: 980,
+                margin: isMobile ? "32px 8px" : "64px auto",
+                borderRadius: "32px",
+                boxShadow: "0 4px 32px rgba(17,29,81,0.10)",
+                overflow: "hidden",
+                minHeight: isMobile ? 0 : 420,
+                width: "100%",
+            }}
+        >
+            {/* Decorative blurred shapes */}
+            <div className="absolute top-0 left-0 w-72 h-72 bg-indigo-200 opacity-30 rounded-full blur-3xl -z-10 animate-pulse" />
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-400 opacity-20 rounded-full blur-3xl -z-10 animate-pulse" />
+            <div
+                style={{
+                    background: "rgba(255,255,255,0.92)",
+                    backdropFilter: "blur(2px)",
+                    borderRadius: "32px",
+                    padding: isMobile ? "32px 16px" : "56px 48px 56px 56px",
+                }}
+            >
+                <h2
+                    style={{
+                        color: "#0b1336",
+                        marginBottom: "28px",
+                        fontSize: isMobile ? "1.5rem" : "2.4rem",
+                        fontWeight: 800,
+                        fontFamily: "'Montserrat', Arial, sans-serif",
+                        lineHeight: 1.1,
+                        letterSpacing: "1.2px",
+                        background: "linear-gradient(90deg, #4f8cff 10%, #0b1336 90%)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        borderLeft: "4px solid #4f8cff",
+                        paddingLeft: "16px",
+                    }}
+                >
+                    Servicios
+                </h2>
+                <p
+                    style={{
+                        color: "#1a2a5c",
+                        lineHeight: 1.8,
+                        fontFamily: "'Open Sans', Arial, sans-serif",
+                        fontSize: isMobile ? "1rem" : "1.08rem",
+                        margin: 0,
+                        opacity: 0.96,
+                        marginBottom: "32px",
+                        textAlign: "left",
+                        maxWidth: 700,
+                    }}
+                >
+                    Soluciones digitales a medida para potenciar tu presencia online y optimizar tus procesos.
+                </p>
+                <div
+                    className="grid"
+                    style={{
+                        gap: isMobile ? 24 : 32,
+                        gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
+                        marginTop: isMobile ? 16 : 32,
+                    }}
+                >
+                    {services.map((service, idx) => (
+                        <div
+                            key={idx}
+                            style={{
+                                background: "#fff",
+                                border: "1px solid #e0e7ff",
+                                borderRadius: "24px",
+                                padding: isMobile ? "24px" : "32px",
+                                boxShadow: "0 2px 16px rgba(80,100,200,0.07)",
+                                transition: "box-shadow 0.3s, border 0.3s, transform 0.3s",
+                                position: "relative",
+                                overflow: "hidden",
+                            }}
+                            className="group hover:shadow-2xl hover:-translate-y-2 hover:border-indigo-400"
+                        >
+                            {/* Animated background accent */}
+                            <span className="absolute -top-10 -right-10 w-40 h-40 bg-indigo-100 rounded-full opacity-0 group-hover:opacity-70 transition duration-700 blur-2xl"></span>
+                            <div className="flex items-center justify-center mb-8">
+                                <div className="bg-gradient-to-tr from-indigo-100 to-indigo-300 rounded-2xl p-6 shadow-md transition-transform duration-300 group-hover:scale-110">
+                                    {service.icon}
+                                </div>
                             </div>
+                            <h3
+                                style={{
+                                    fontSize: "1.35rem",
+                                    fontWeight: 700,
+                                    color: "#0b1336",
+                                    marginBottom: "12px",
+                                    fontFamily: "'Montserrat', Arial, sans-serif",
+                                    transition: "color 0.3s",
+                                }}
+                                className="group-hover:text-indigo-600 drop-shadow"
+                            >
+                                {service.title}
+                            </h3>
+                            <p
+                                style={{
+                                    color: "#4b5563",
+                                    fontSize: "1rem",
+                                    lineHeight: 1.7,
+                                    marginBottom: 0,
+                                }}
+                            >
+                                {service.description}
+                            </p>
+                            {/* Decorative line */}
+                            <div className="mt-8 h-1 w-16 bg-gradient-to-r from-indigo-400 to-indigo-600 rounded-full mx-auto opacity-60 group-hover:opacity-100 transition" />
                         </div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors duration-300 drop-shadow">
-                            {service.title}
-                        </h3>
-                        <p className="text-gray-500 text-base leading-relaxed">{service.description}</p>
-                        {/* Decorative line */}
-                        <div className="mt-8 h-1 w-16 bg-gradient-to-r from-indigo-400 to-indigo-600 rounded-full mx-auto opacity-60 group-hover:opacity-100 transition" />
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
-        </div>
-    </section>
-);
+        </section>
+    );
+};
 
 export default ServicesSection;
