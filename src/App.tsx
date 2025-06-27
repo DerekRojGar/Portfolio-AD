@@ -7,6 +7,7 @@ import Carousel from './components/carousel'
 import About from './components/about'
 import AboutV2 from './components/aboutv2'
 import ServicesSection from './components/services'
+import Banner from './components/banner'
 
 function App() {
   const [showNavbar, setShowNavbar] = useState(false)
@@ -36,13 +37,14 @@ function App() {
       <Navbar />
     </div>
     <div>
-      <div ref={carouselRef}>
-      <Carousel />
+      <Banner />
+      <div ref={carouselRef}>        
       </div>
       {/* <Tables /> */}
       {/*<About />*/}
       <AboutV2 />
       <ServicesSection />
+      <Carousel />
     </div>
     <Footer />
   </>

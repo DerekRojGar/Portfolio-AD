@@ -2,97 +2,189 @@ import React, { useState } from "react";
 
 const images = [
     {
-        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+        src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80",
         alt: "Paisaje de montaña",
         label: "First Slide"
     },
     {
-        src: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80",
+        src: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1600&q=80",
         alt: "Bosque en la niebla"
     },
     {
-        src: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
+        src: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1600&q=80",
         alt: "Ciudad de noche"
     }
 ];
 
+const useIsMobile = () => {
+    const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 700);
+    React.useEffect(() => {
+        const handler = () => setIsMobile(window.innerWidth <= 700);
+        window.addEventListener("resize", handler);
+        return () => window.removeEventListener("resize", handler);
+    }, []);
+    return isMobile;
+};
+
 const Carousel: React.FC = () => {
-  const [current, setCurrent] = useState(0);
+    const [current, setCurrent] = useState(0);
+    const isMobile = useIsMobile();
 
-  const goToPrev = () => setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  const goToNext = () => setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  const goToSlide = (idx: number) => setCurrent(idx);
+    const goToPrev = () => setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    const goToNext = () => setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    const goToSlide = (idx: number) => setCurrent(idx);
 
-  return (
-    <div className="max-w-5xl mx-auto pt-24">
-    <div className="relative">
-        {/* Carousel wrapper */}
-        <div className="overflow-hidden relative h-80 rounded-lg sm:h-96 xl:h-[32rem] 2xl:h-[40rem]">
-        {images.map((img, idx) => (
+    return (
+        <section
+            style={{
+                width: "100vw",
+                position: "relative",
+                margin: isMobile ? "24px 0" : "48px 0",
+                left: "50%",
+                right: "50%",
+                transform: "translateX(-50%)",
+                overflow: "hidden",
+                borderRadius: 0,
+                background: "#fff",
+            }}
+        >
             <div
-                key={img.src}
-                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${idx === current ? "opacity-100 z-10" : "opacity-0 z-0"}`}
-                aria-hidden={idx !== current}
+                className="relative"
+                style={{
+                    width: "100vw",
+                    height: isMobile ? "220px" : "420px",
+                    minHeight: isMobile ? 180 : 320,
+                }}
             >
-                {img.label && (
-                <span className="absolute top-1/2 left-1/2 text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 sm:text-3xl dark:text-gray-800">
-                    {img.label}
-                </span>
-                )}
-                <img
-                src={img.src}
-                className="block w-full h-full object-cover rounded-lg"
-                alt={img.alt}
-                />
+                {images.map((img, idx) => (
+                    <div
+                        key={img.src}
+                        className="absolute inset-0 flex items-center justify-center"
+                        style={{
+                            opacity: idx === current ? 1 : 0,
+                            zIndex: idx === current ? 2 : 1,
+                            pointerEvents: idx === current ? "auto" : "none",
+                            transition: "opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1)",
+                            transform: idx === current ? "scale(1)" : "scale(0.98)",
+                            willChange: "opacity, transform",
+                        }}
+                        aria-hidden={idx !== current}
+                    >
+                        {img.label && (
+                            <span
+                                style={{
+                                    position: "absolute",
+                                    top: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, -50%)",
+                                    fontSize: isMobile ? "1.1rem" : "1.5rem",
+                                    fontWeight: 600,
+                                    color: "#fff",
+                                    textShadow: "0 2px 8px rgba(0,0,0,0.18)",
+                                    background: "rgba(0,0,0,0.18)",
+                                    borderRadius: "12px",
+                                    padding: "4px 18px",
+                                    letterSpacing: "0.5px",
+                                    opacity: 0.85,
+                                }}
+                            >
+                                {img.label}
+                            </span>
+                        )}
+                        <img
+                            src={img.src}
+                            alt={img.alt}
+                            style={{
+                                width: "100vw",
+                                height: isMobile ? "220px" : "420px",
+                                objectFit: "cover",
+                                borderRadius: 0,
+                                boxShadow: "none",
+                                display: "block",
+                                margin: 0,
+                                padding: 0,
+                            }}
+                        />
+                    </div>
+                ))}
+                {/* Slider controls */}
+                <button
+                    type="button"
+                    aria-label="Anterior"
+                    className="absolute top-1/2 left-4 z-30 flex items-center justify-center"
+                    onClick={goToPrev}
+                    style={{
+                        transform: "translateY(-50%)",
+                        background: "rgba(255,255,255,0.7)",
+                        border: "none",
+                        borderRadius: "50%",
+                        width: 36,
+                        height: 36,
+                        boxShadow: "0 1px 6px rgba(80,100,200,0.07)",
+                        transition: "background 0.2s",
+                        outline: "none",
+                        cursor: "pointer",
+                        opacity: 0.85,
+                    }}
+                >
+                    <svg width={18} height={18} viewBox="0 0 24 24" stroke="#4f8cff" fill="none" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                </button>
+                <button
+                    type="button"
+                    aria-label="Siguiente"
+                    className="absolute top-1/2 right-4 z-30 flex items-center justify-center"
+                    onClick={goToNext}
+                    style={{
+                        transform: "translateY(-50%)",
+                        background: "rgba(255,255,255,0.7)",
+                        border: "none",
+                        borderRadius: "50%",
+                        width: 36,
+                        height: 36,
+                        boxShadow: "0 1px 6px rgba(80,100,200,0.07)",
+                        transition: "background 0.2s",
+                        outline: "none",
+                        cursor: "pointer",
+                        opacity: 0.85,
+                    }}
+                >
+                    <svg width={18} height={18} viewBox="0 0 24 24" stroke="#4f8cff" fill="none" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="9 6 15 12 9 18" />
+                    </svg>
+                </button>
+                {/* Slider indicators */}
+                <div
+                    className="flex absolute bottom-4 left-1/2 z-30"
+                    style={{
+                        transform: "translateX(-50%)",
+                        gap: 8,
+                    }}
+                >
+                    {images.map((_, idx) => (
+                        <button
+                            key={idx}
+                            type="button"
+                            aria-label={`Slide ${idx + 1}`}
+                            onClick={() => goToSlide(idx)}
+                            style={{
+                                width: 8,
+                                height: 8,
+                                borderRadius: "50%",
+                                background: current === idx ? "#4f8cff" : "#dbeafe",
+                                border: "none",
+                                transition: "background 0.2s",
+                                outline: "none",
+                                cursor: "pointer",
+                                opacity: current === idx ? 1 : 0.7,
+                            }}
+                        />
+                    ))}
+                </div>
             </div>
-            ))}
-        </div>
-        {/* Slider indicators */}
-        <div className="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
-          {images.map((_, idx) => (
-            <button
-              key={idx}
-              type="button"
-              className={`w-3 h-3 rounded-full ${current === idx ? "bg-blue-600" : "bg-white"}`}
-              aria-current={current === idx}
-              aria-label={`Slide ${idx + 1}`}
-              onClick={() => goToSlide(idx)}
-            ></button>
-          ))}
-        </div>
-        {/* Slider controls */}
-        <button
-          type="button"
-          className="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
-          onClick={goToPrev}
-        >
-          <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
-            <span className="hidden">Previous</span>
-          </span>
-        </button>
-        <button
-          type="button"
-          className="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
-          onClick={goToNext}
-        >
-          <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-            <span className="hidden">Next</span>
-          </span>
-        </button>
-      </div>
-      {/* <p className="mt-5">
-        This carousel slider component is part of a larger, open-source library of Tailwind CSS components. Learn
-        more by going to the official{" "}
-        <a className="text-blue-600 hover:underline"
-          href="https://flowbite.com/docs/getting-started/introduction/"
-          target="_blank" rel="noopener noreferrer">
-          Flowbite Documentation
-        </a>.
-      </p> */}
-    </div>
-  );
+        </section>
+    );
 };
 
 export default Carousel;
